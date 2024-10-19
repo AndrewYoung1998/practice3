@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (enoughItemsSelected()) {
+                if (ItemsSelected()) {
                     //Proceed to next activity
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     // Filter selected products and pass them to the next activity
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     //Display Error Snackbar
-                    Snackbar snackbar = Snackbar.make(v, "Please select 3 or more products!",
+                    Snackbar snackbar = Snackbar.make(v, "Please select 2 or more products!",
                             Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean enoughItemsSelected() {
-        return ((ProductAdapter) mAdapter).getSelectedItemCount() >= 3;
+    private boolean ItemsSelected() {
+        return ((ProductAdapter) mAdapter).getSelectedItemCount() >= 2;
     }
 
     private void initDB() {

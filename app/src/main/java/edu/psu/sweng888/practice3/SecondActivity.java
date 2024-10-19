@@ -68,16 +68,27 @@ public class SecondActivity extends AppCompatActivity {
         ArrayList<Uri> imageUris = new ArrayList<>();
 
         // Convert drawable resources to Bitmaps and save as files
-        int[] drawableIds = {R.drawable.nintendo_switch, R.drawable.ps5, R.drawable.xbox_series_x};
 
+        List<Integer> drawableIdList = new ArrayList<>();
         // Iterate over products and build email body
         for (Product product : selectedProducts) {
             emailBody.append("Product Name: ").append(product.getName()).append("\n");
             emailBody.append("Description: ").append(product.getDescription()).append("\n");
             emailBody.append("Seller: ").append(product.getSeller()).append("\n");
             emailBody.append("Price: $").append(product.getPrice()).append("\n\n");
-        }
+            // Normalize product names by converting to lowercase and trimming spaces
+            String productName = product.getName().toLowerCase().trim();
 
+            // Add the appropriate drawable based on the normalized product name
+            if (productName.contains("nintendo")) {
+                drawableIdList.add(R.drawable.nintendo_switch);
+            } else if (productName.contains("playstation")) {
+                drawableIdList.add(R.drawable.ps5);
+            } else if (productName.contains("xbox")) {
+                drawableIdList.add(R.drawable.xbox_series_x);
+            }
+        }
+        int[] drawableIds = drawableIdList.stream().mapToInt(i -> i).toArray();
         // Attach images (with fixed drawable IDs)
         for (int drawableId : drawableIds) {
             Bitmap bitmap = getBitmapFromDrawable(drawableId);  // Convert drawable to Bitmap
