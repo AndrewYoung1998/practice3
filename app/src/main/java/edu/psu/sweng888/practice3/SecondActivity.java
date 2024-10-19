@@ -119,6 +119,7 @@ public class SecondActivity extends AppCompatActivity {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         } else {
+            assert drawable != null;
             Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
                     drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);

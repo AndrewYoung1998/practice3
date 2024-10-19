@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static String LOG_TAG = "Practice3Main";
     private ProductDatabaseHelper db;
-    private List<Product> mProductList;
     private RecyclerView.Adapter mAdapter;
 
     public static String getLogTag() {
@@ -58,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
         initDB();
 
         RecyclerView mListView = (RecyclerView) findViewById(R.id.recyclerView);
-        mProductList = db.queryAllCourses();
+        List<Product> productList = db.queryAllCourses();
 
-        mAdapter = new ProductAdapter(mProductList, null);
+        mAdapter = new ProductAdapter(productList, null);
         mListView.setAdapter(mAdapter);
         mListView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     //Proceed to next activity
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     // Filter selected products and pass them to the next activity
-                    ArrayList<Product> selectedProducts = mProductList.stream()
+                    ArrayList<Product> selectedProducts = productList.stream()
                             .filter(e -> ((ProductAdapter) mAdapter)
                                     .getProductSelectedMap().get(e.getId())).collect(Collectors.toCollection(ArrayList::new));
                     if (selectedProducts.isEmpty()) {

@@ -3,4 +3,5 @@
     <string name="next">Next</string>
     <string name="proceed">Proceed\n</string>
     <string name="proceed_to_email">Proceed to Email</string>
+    <string name="email_products">Email Products</string>
 </resources>
